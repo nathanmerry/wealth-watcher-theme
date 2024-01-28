@@ -4,14 +4,14 @@
  * Include JavaScript files.
  */
 function enqueue_js() {
-  wp_enqueue_script('index-js', get_manifest_file('scripts/index.js'), [], 1.23, true);
+  wp_enqueue_script('index-js', get_manifest_file('scripts/main.js'), [], 1.23, true);
 }
 
 /**
  * Enqueue CSS files.
  */
 function enqueue_css() {
-  wp_enqueue_style('index-css', get_manifest_file('styles/index.css'), [], 1.23);
+  wp_enqueue_style('index-css', get_manifest_file('styles/main.css'), [], 1.23);
 }
 
 
