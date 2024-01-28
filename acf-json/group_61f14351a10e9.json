@@ -1,0 +1,122 @@
+{
+    "key": "group_61f14351a10e9",
+    "title": "Cryptocurrencies Fields",
+    "fields": [
+        {
+            "key": "field_61f14361d5148",
+            "label": "Cryptocurrencies",
+            "name": "cryptocurrencies",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "field_61f1438dd5149",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Cryptocurrency",
+            "sub_fields": [
+                {
+                    "key": "field_61f1438dd5149",
+                    "label": "Name",
+                    "name": "name",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_61f14392d514a",
+                    "label": "Old Price",
+                    "name": "old_price",
+                    "type": "text",
+                    "instructions": "Formatted text without currency symbol\r\nExample: 51,234.66",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_61f1439ad514b",
+                    "label": "New Price",
+                    "name": "new_price",
+                    "type": "text",
+                    "instructions": "Formatted text without currency symbol\r\nExample: 51,234.66",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_61f143a4d514c",
+                    "label": "Profit",
+                    "name": "profit",
+                    "type": "text",
+                    "instructions": "No commas or percentage sign, use \".\" as decimal separator\r\nExample: \"186.55\"",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "cryptocurrencies"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1643201579
+}

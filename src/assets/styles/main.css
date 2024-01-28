@@ -1,0 +1,317 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+body {
+  @apply bg-white font-body;
+  overflow-x: hidden;
+  padding: 0;
+  font-size: 18px;
+  color: #151515;
+  line-height: 1.25;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading;
+}
+
+p {
+  @apply mb-4 text-lg leading-normal;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  box-shadow: 0.3px 4px 13.8px 2.2px rgb(20 22 25 / 15%);
+}
+
+.container {
+  @apply px-4 mx-auto max-w-8xl;
+}
+
+.row {
+  @apply flex flex-wrap -mx-4;
+}
+
+/* .header-menu a {
+  @apply inline-flex items-center justify-center px-4 py-1 text-center;
+} */
+
+.hamb-menu {
+  overflow: visible;
+  cursor: pointer;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
+  -webkit-transition-duration: .15s;
+  transition-duration: .15s;
+  -webkit-transition-property: all;
+  transition-property: all;
+  border: 0;
+  background-color: transparent;
+}
+
+.hamb-menu .hamb-menu__box {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 24px;
+}
+
+.hamb-menu__inner {
+  top: auto;
+  bottom: 0;
+  -webkit-transition-delay: .13s;
+  transition-delay: .13s;
+  -webkit-transition-timing-function: cubic-bezier(.55,.055,.675,.19);
+  transition-timing-function: cubic-bezier(.55,.055,.675,.19);
+  -webkit-transition-duration: .13s;
+  transition-duration: .13s;
+}
+
+.hamb-menu__inner,
+.hamb-menu__inner::before,
+.hamb-menu__inner::after {
+  position: absolute;
+  left: 0;
+  width: 30px;
+  height: 3px;
+  -webkit-transition-timing-function: ease;
+  transition-timing-function: ease;
+  -webkit-transition-duration: .15s;
+  transition-duration: .15s;
+  transition-property: -webkit-transform;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  transition-property: transform,-webkit-transform;
+  border-radius: 4px;
+  @apply bg-orange;
+}
+
+.hamb-menu__inner::before {
+  display: block;
+  content: "";
+  top: -10px;
+  transition: top .12s cubic-bezier(.33333,.66667,.66667,1) .2s,-webkit-transform .13s cubic-bezier(.55,.055,.675,.19);
+  -webkit-transition: top .12s cubic-bezier(.33333,.66667,.66667,1) .2s,-webkit-transform .13s cubic-bezier(.55,.055,.675,.19);
+  transition: top .12s cubic-bezier(.33333,.66667,.66667,1) .2s,transform .13s cubic-bezier(.55,.055,.675,.19);
+  transition: top .12s cubic-bezier(.33333,.66667,.66667,1) .2s,transform .13s cubic-bezier(.55,.055,.675,.19),-webkit-transform .13s cubic-bezier(.55,.055,.675,.19);
+}
+
+.hamb-menu__inner::after {
+  display: block;
+  content: "";
+  bottom: -10px;
+  top: -20px;
+  -webkit-transition: top .2s cubic-bezier(.33333,.66667,.66667,1) .2s,opacity .1s linear;
+  transition: top .2s cubic-bezier(.33333,.66667,.66667,1) .2s,opacity .1s linear;
+}
+
+.menu--active #nav-main {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  @apply bg-white border-t border-b;
+}
+
+.menu--active #nav-main .header-menu {
+  display: block;
+}
+
+.menu--active #nav-main .header-menu li {
+  text-align: center;
+  @apply py-4;
+}
+
+.section_decription p {
+  @apply text-3xl leading-normal;
+}
+
+.main, .white {
+  color: #fff;
+}
+
+/* FORM */
+.registration-form-title {
+  text-align: center;
+  font-size: 24px;
+  @apply text-secondary;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding: 10px 20px;
+}
+
+.registration-form {
+  /* border-radius: 10px;
+  background-color: #fff;
+  padding: 10px; */
+  box-shadow: 0.3px 4px 29px 0 rgb(50 35 65 / 29%);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input, select {
+  /* border-radius: 25px; */
+  border: 1px solid #c6c6c6;
+  width: 100%;
+  font-size: 18px;
+  /* font-weight: 700; */
+  color: #161616;
+  /* padding: 10px 20px;
+  height: 50px; */
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #ABB2BE;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #ABB2BE;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #ABB2BE;
+}
+
+.submit-button {
+  border: 0;
+  /* color: #fff; */
+  /* text-transform: uppercase; */
+  width: 100%;
+  transition: all .4s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-link {
+  text-align: center;
+  padding: 5px 15px;
+  border: 0;
+  border-radius: 33px;
+  @apply bg-gradient-to-t from-primary to-primary-darken;
+  font-size: 25px;
+  min-height: 66px;
+  text-transform: uppercase;
+  width: 100%;
+  transition: all .4s;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff!important;
+  text-decoration: none!important;
+}
+
+.btn-link:hover {
+  box-shadow: 0.3px 4px 13.8px 2.2px rgb(20 22 25 / 15%);
+}
+
+/* How Section */
+.how {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+  padding: 60px 0;
+  color: #fff;
+  counter-reset: list;
+}
+
+.how-item {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px;
+  color: #181b33;
+}
+
+/* .how-item-title {
+  font-size: 25px;
+  font-weight: 700;
+  color: #1354c2;
+  margin-bottom: 20px;
+  position: relative;
+} */
+
+.how-item-title:before {
+  counter-increment: list;
+  content: "0" counter(list);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: middle;
+  width: 32px;
+  height: 32px;
+  @apply bg-secondary;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+
+.how-item-title:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -20px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  @apply bg-primary;
+}
+
+.how-item-text p:last-child {
+  @apply mb-0;
+}
+
+/* FAQ Section */
+.faq-item-title {
+  /* box-shadow: 0.3px 4px 29px 0 rgb(5 103 182 / 29%); */
+  border-color: #c6c6c6;
+  @apply relative inline-flex items-center w-full p-3 border-2 rounded cursor-pointer lg:p-6 lg:text-lg;
+}
+
+/* Footer */
+
+.footer {
+    background-color: #21252c;
+}
+
+.footer-menu li {
+  margin-left: 20px;
+}
+
+.footer-menu li:first-child {
+  margin-left: 0;
+}
+
+/* Phone nu,ber field fix */
+.iti {
+  width: 100%;
+}
+.iti__country-list {
+  width: 20rem;
+  color: #888;
+}
+
+.iti div.iti__flag-container {
+  left: 10px;
+}
+
+.iti input[type="text"].phone {
+  padding-left: 60px;
+}
+
+/* Input Radio Checked states */
+input[name="interval"]:checked + label {
+  @apply font-semibold text-white bg-blazeOrange;
+}

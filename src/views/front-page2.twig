@@ -1,0 +1,490 @@
+{% extends "base.twig" %}
+
+{% block content %}
+{% filter shortcodes|raw %}
+  {% if page.meta('sections')|length > 0 %}
+    {% for section in page.meta('sections') %}
+
+      {% if section.acf_fc_layout == 'form_section' %}
+        <style>
+          .main {
+            background-image: url({{ theme.link }}/static/main-bg.webp);
+          }
+          .form-footer p {
+            font-size: 10px!important;
+            text-align: center;
+            color: #000;
+          }
+
+          .form-footer a {
+            color: #f59015!important;
+          }
+
+          /* Chrome, Safari, Edge, Opera */
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+          }
+
+          /* Firefox */
+          input[type=number] {
+            -moz-appearance: textfield;
+          }
+        </style>
+        <section class="main py-8 md:py-16">
+          <div class="container mb-12" style="max-width: 1220px;">
+            <h1 class="heading text-3xl md:text-5xl text-center font-bold mb-6 md:mb-0">{{ section.heading }}</h1>
+            <h2 class="text-xl md:text-3xl text-center">{{ section.subheading }}</h2>
+          </div>
+          <div class="container" style="max-width: 1300px;">
+            <div class="row">
+              <div class="hidden lg:block w-2/3">
+                <div class="px-4 mb-6 lg:mb-0">
+                  <img src="{{ Image(section.image).src }}" alt="{{ Image(section.image).src }}">
+                </div>
+              </div>
+              <div class="w-full lg:w-1/3">
+                <div class="px-4">
+                  <div class="registration-form" id="registration-form">
+                    <div class="registration-form-title">{{ section.form.heading }}</div>
+                    <div class="registration-form-body">
+                      <div>
+                        <form data-id="form" data-funnel="immediate-edge" x-data="signUpForm()" @submit.prevent="submitData">
+                          {#<div class="alert alert-danger hidden" role="alert"></div>#}
+                          {{ fn('wp_nonce_field', 'signup_form_submit', 'signup_form_security_check', false, false) }}
+
+                          <div x-show="showAlertMessage" x-transition:enter="transition ease-out duration-300"
+                               x-transition:enter-start="opacity-0 transform scale-90"
+                               x-transition:enter-end="opacity-100 transform scale-100"
+                               x-transition:leave="transition ease-in duration-300"
+                               x-transition:leave-start="opacity-100 transform scale-100"
+                               x-transition:leave-end="opacity-0 transform scale-90">
+                            <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-4"
+                                 role="alert">
+                              <p class="mb-0">Please fix the error given below!</p>
+                            </div>
+                          </div>
+
+                          <div x-show="failure" x-transition:enter="transition ease-out duration-300"
+                               x-transition:enter-start="opacity-0 transform scale-90"
+                               x-transition:enter-end="opacity-100 transform scale-100"
+                               x-transition:leave="transition ease-in duration-300"
+                               x-transition:leave-start="opacity-100 transform scale-100"
+                               x-transition:leave-end="opacity-0 transform scale-90">
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 my-4"
+                                 role="alert">
+                              <p class="mb-0" x-text="message"></p>
+                            </div>
+                          </div>
+
+                          <div x-show="success" x-transition:enter="transition ease-out duration-300"
+                               x-transition:enter-start="opacity-0 transform scale-90"
+                               x-transition:enter-end="opacity-100 transform scale-100"
+                               x-transition:leave="transition ease-in duration-300"
+                               x-transition:leave-start="opacity-100 transform scale-100"
+                               x-transition:leave-end="opacity-0 transform scale-90">
+                            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-4"
+                                 role="alert">
+                              <p class="mb-0" x-text="message"></p>
+                            </div>
+                          </div>
+
+                          <div class="mb-4 relative">
+                            <input name="first_name"
+                                   placeholder="First Name"
+                                   type="text"
+                                   x-model="formData.firstName"
+                                   x-on:keydown="delete errors['firstName']"
+                                   x-bind:class="{ 'border-red text-red': errors['firstName'] }"
+                            >
+                            <template x-if="errors['firstName']">
+                            <span>
+                              <svg class="w-6 h-6 absolute text-red fill-current"
+                                   style="top: 12px; right: 12px" xmlns="http://www.w3.org/2000/svg"
+                                   viewBox="0 0 24 24">
+                                <path
+                                  d="M11.953,2C6.465,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.493,2,11.953,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+                              </svg>
+                              <span class="text-red mt-2 pl-5 text-sm block"
+                                    x-text="errors['firstName']"></span>
+                            </span>
+                            </template>
+                          </div>
+                          <div class="mb-4 relative">
+                            <input name="last_name"
+                                   placeholder="Last Name"
+                                   type="text"
+                                   x-model="formData.lastName"
+                                   x-on:keydown="delete errors['lastName']"
+                                   x-bind:class="{ 'border-red text-red': errors['lastName'] }"
+                            >
+                            <template x-if="errors['lastName']">
+                            <span>
+                              <svg class="w-6 h-6 absolute text-red fill-current"
+                                   style="top: 12px; right: 12px" xmlns="http://www.w3.org/2000/svg"
+                                   viewBox="0 0 24 24">
+                                <path
+                                  d="M11.953,2C6.465,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.493,2,11.953,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+                              </svg>
+                              <span class="text-red mt-2 pl-5 text-sm block"
+                                    x-text="errors['lastName']"></span>
+                            </span>
+                            </template>
+                          </div>
+                          <div class="mb-4 relative">
+                            <input name="email"
+                                   placeholder="Email Address"
+                                   type="text"
+                                   x-model="formData.email"
+                                   x-on:keydown="delete errors['email']"
+                                   x-bind:class="{ 'border-red text-red': errors['email'] }"
+                            >
+                            <template x-if="errors['email']">
+                            <span>
+                              <svg class="w-6 h-6 absolute text-red fill-current"
+                                   style="top: 12px; right: 12px" xmlns="http://www.w3.org/2000/svg"
+                                   viewBox="0 0 24 24">
+                                <path
+                                  d="M11.953,2C6.465,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.493,2,11.953,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+                              </svg>
+                              <span class="text-red mt-2 pl-5 text-sm block"
+                                    x-text="errors['email']"></span>
+                            </span>
+                            </template>
+                          </div>
+                          <div class="mb-4 relative">
+                            <input class="phone"
+                                   name="phone"
+                                   type="number"
+                                   x-model="formData.telephone"
+                                   x-on:keydown="delete errors['phone']"
+                                   x-bind:class="{ 'border-red text-red': errors['phone'] }"
+                            >
+                            <template x-if="errors['phone']">
+                            <span>
+                              <svg class="w-6 h-6 absolute text-red fill-current"
+                                   style="top: 12px; right: 12px" xmlns="http://www.w3.org/2000/svg"
+                                   viewBox="0 0 24 24">
+                                <path
+                                  d="M11.953,2C6.465,2,2,6.486,2,12s4.486,10,10,10s10-4.486,10-10S17.493,2,11.953,2z M13,17h-2v-2h2V17z M13,13h-2V7h2V13z" />
+                              </svg>
+                              <span class="text-red mt-2 pl-5 text-sm block"
+                                    x-text="errors['phone']"></span>
+                            </span>
+                            </template>
+                          </div>
+
+                          <div class="form-group form-actions">
+                            <button type="submit"
+                                    class="submit-button"
+                                    {#onclick="return gtag_report_conversion()"#}
+                                    :disabled="loading"
+                            >
+                            	<span x-show="loading" class="flex items-center">
+                            		Please wait...
+                            		<img src="{{ theme.link }}/static/spinner.svg" alt="" width="50" height="50" style="margin-left: 10px;">
+                            	</span>
+                            	<span x-show="!loading">{{ section.form.button_label }}</span>
+                            </button>
+                            {#<p class="mt-4 p-2 text-primary" x-text="message"></p>#}
+                          </div>
+                          <div class="form-actions">
+                            <div class="form-footer">{{ section.form.legal_text }}</div>
+                          </div>
+                        </form>
+                        <script>
+                          function signUpForm() {
+                            return {
+                              formData: {
+                                {% if use_production_api %}
+                                  action: 'ixx_register_form_submit',
+                                {% else %}
+                                  action: 'ixx_register_form_submit_test',
+                                {% endif %}
+                                firstName: '',
+                                lastName: '',
+                                email: '',
+                                telephone: '',
+                                signup_form_security_check: '',
+                                offerName: '{{ function("do_shortcode", section.form.offer_name) }}',
+                                pvid: '{{ function("ixx_get_page_view_id") }}',
+                                pageid: '{{ page.ID }}'
+                              },
+                              success: false,
+                              failure: false,
+                              message: '',
+                              showAlertMessage: false,
+                              loading: false,
+                              buttonLabel: 'Submit',
+                              errors: [],
+
+                              submitData() {
+                                this.formData.signup_form_security_check = document.getElementById('signup_form_security_check').value;
+                                this.message = '';
+                                this.buttonLabel = 'Submitting...';
+                                this.loading = true;
+
+                                if (this.formData.firstName === '') {
+                                  this.errors.firstName = 'The First Name field is required';
+                                  this.showAlertMessage = true;
+                                  this.loading = false;
+                                }
+
+                                if (this.formData.lastName === '') {
+                                  this.errors.lastName = 'The Last Name field is required';
+                                  this.showAlertMessage = true;
+                                  this.loading = false;
+                                }
+
+                                const expression = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                                const validEmail = expression.test(String(this.formData.email).toLowerCase());
+
+                                if (this.formData.email === '') {
+                                  this.errors.email = 'The Email field is required';
+                                  this.showAlertMessage = true;
+                                  this.loading = false;
+                                } else if (!validEmail) {
+                                  this.errors.email = 'Please enter a valid email address';
+                                  this.showAlertMessage = true;
+                                  this.loading = false;
+                                }
+
+                                if (this.formData.telephone === '') {
+                                  this.errors.phone = 'The Phone Number field is required';
+                                  this.showAlertMessage = true;
+                                  this.loading = false;
+                                } else if (!window.iti.isValidNumber()) {
+                                  const error = window.iti.getValidationError();
+                                  console.log(error);
+                                  if (error === intlTelInputUtils.validationError.TOO_SHORT) {
+                                    this.errors.phone = 'The Phone Number value is too short';
+                                    this.showAlertMessage = true;
+                                    this.loading = false;
+                                  } else if (error === intlTelInputUtils.validationError.TOO_LONG ) {
+                                    this.errors.phone = 'The Phone Number value is too long';
+                                    this.showAlertMessage = true;
+                                    this.loading = false;
+                                  } else if (error === intlTelInputUtils.validationError.INVALID_LENGTH) {
+                                    this.errors.phone = 'The Phone Number value has invalid length';
+                                    this.showAlertMessage = true;
+                                    this.loading = false;
+                                  } else if (error === intlTelInputUtils.validationError.INVALID_COUNTRY_CODE) {
+                                    this.errors.phone = 'The Phone Number value has invalid country code';
+                                    this.showAlertMessage = true;
+                                    this.loading = false;
+                                  } else if (error === -99) {
+                                    this.errors.phone = 'Please enter a valid Phone Number';
+                                    this.showAlertMessage = true;
+                                    this.loading = false;
+                                  }
+                                }
+
+                                if (this.loading) {
+                                  const form = new FormData();
+
+                                  for (const [field, value] of Object.entries(this.formData)) {
+                                    if (field === 'telephonephone') {
+                                      form.append(field, window.iti.getNumber());
+                                    } else {
+                                      form.append(field, value);
+                                    }
+                                  }
+
+                                  const ip = document.querySelector('.phone').dataset.ip;
+                                  const urlParams = new URLSearchParams(window.location.search);
+                                  const source = urlParams.get('source');
+                                  console.log('source: ' + source);
+                                  if (ip) {
+                                    form.append('ipAddress', ip);
+                                  }
+                                  if (source) {
+                                    form.append('source', source);
+                                  }
+
+                                  const params = new URLSearchParams(form);
+
+                                  fetch('/wp-admin/admin-ajax.php', {
+                                    method: 'POST',
+                                    credentials: 'same-origin',
+                                    headers: new Headers({'Content-Type': 'application/x-www-form-urlencoded'}),
+                                    body: params
+                                  })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                      console.log(data);
+                                      console.log(data.success);
+                                      if (data.success) {
+                                       {% if use_production_api %} gtag_report_conversion(); {% endif %}
+                                        this.failure = false;
+                                        this.success = true;
+                                        this.message = data.data.message;
+                                        console.log(data.data.redirect);
+                                        if (data.data.redirect) {
+                                          window.location.href = data.data.redirect;
+                                        }
+                                      } else {
+                                        this.failure = true;
+                                        let messages = data.finalResponse.messages[0];
+                                        messages = JSON.parse(messages);
+                                        this.message = messages[0];
+                                      }
+
+                                    })
+                                    .catch(() => {
+                                      this.failure = true;
+                                      this.message = 'Oops! Something went wrong!';
+                                    })
+                                    .finally(() => {
+                                      this.loading = false;
+                                      this.showAlertMessage = false;
+                                      this.buttonLabel = 'Submit';
+                                    })
+                                }
+                              }
+                            }
+                          }
+                        </script>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      {% elseif section.acf_fc_layout == 'section_with_text_and_button' %}
+        <section class="py-15"{% if section.background_color %} style="background-color: {{ section.background_color }};"{% endif %}>
+          <div class="container">
+            <div class="row items-center">
+              {% if section.image_position == 'left' %}
+                <div class="flex justify-center w-full lg:w-1/4 mb-8 lg:mb-0 px-4">
+                  {% if section.image %}
+                    <img src="{{ Image(section.image).src }}" alt="{{ Image(section.image).alt }}">
+                  {% endif %}
+                </div>
+              {% else %}
+                <div class="flex lg:hidden w-full justify-center mb-8 px-4">
+                  {% if section.image %}
+                    <img src="{{ Image(section.image).src }}" alt="{{ Image(section.image).alt }}">
+                  {% endif %}
+                </div>
+              {% endif %}
+              <div class="w-full lg:w-3/4 px-4">
+                <h2 class="text-3xl md:text-4.5xl font-semibold mb-6">{{ section.heading }}</h2>
+                {{ section.text }}
+                {% if section.button_text %}
+                  <div class="mt-6 flex justify-center lg:justify-start">
+                    <a href="{{ section.button_link }}" class="btn-link scroll-top" style="max-width: 350px;">{{ section.button_text }}</a>
+                  </div>
+                {% endif %}
+              </div>
+              {% if section.image_position == 'right' %}
+                <div class="hidden lg:flex justify-center w-full lg:w-1/4 px-4">
+                  {% if section.image %}
+                    <img src="{{ Image(section.image).src }}" alt="{{ Image(section.image).alt }}">
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+      {% elseif section.acf_fc_layout == 'benefits_section' %}
+        <section class="py-15">
+          <div class="container text-center">
+            <h2 class="text-3xl md:text-4.5xl font-semibold mb-6">{{ section.heading }}</h2>
+            <div class="section_decription mb-12">{{ section.description }}</div>
+          </div>
+          <div class="container">
+            <div class="row">
+              {% for benefit in section.benefits %}
+                <div class="lg:w-1/2 px-4">
+                  <div class="mb-10">
+                    <div class="text-2xl font-bold text-secondary mb-3">{{ benefit.heading }}</div>
+                    <div class="benefit-text">
+                      {{ benefit.description }}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="text-center mt-4 mt-md-5">
+            <a href="{{ section.button_link }}" class="btn-link scroll-top" style="max-width: 400px;">{{ section.button_text }}</a>
+          </div>
+        </section>
+      {% elseif section.acf_fc_layout == 'how_section' %}
+        <style>
+          .how {
+            background-image: url('{{ theme.link}}/static/how-bg.webp');
+          }
+        </style>
+        <section class="how">
+          <div class="container text-center mb-12">
+            <h2 class="text-3xl md:text-4.5xl font-semibold mb-6">{{ section.heading }}</h2>
+            <div class="text-xl font-bold">{{ section.description|nl2br }}</div>
+          </div>
+          <div class="container">
+            <div class="row">
+              {% for step in section.steps %}
+                <div class="lg:w-1/3 mb-6 px-4">
+                  <div class="how-item">
+                    <h3 class="how-item-title text-2xl text-secondary font-bold mb-5 relative">{{ step.heading }}</h3>
+                    <div class="how-item-text">{{ step.description|nl2br }}</div>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <div class="text-center mt-12">
+              <a href="{{ section.button_link }}" class="btn-link scroll-top" style="max-width: 290px;">{{ section.button_text }}</a>
+            </div>
+          </div>
+        </section>
+      {% elseif section.acf_fc_layout == 'faq_section' %}
+        <section class="py-15"{% if section.background_color %} style="background-color: {{ section.background_color }};"{% endif %}>
+          <div class="container mb-12" style="max-width: 1120px; text-align: center;">
+            <h2 class="text-3xl md:text-4.5xl font-semibold mb-6">{{ section.heading }}</h2>
+            <div class="text-xl font-bold">{{ section.description|nl2br }}</div>
+          </div>
+          <div class="container">
+            <div class="row">
+              {% for row in section.questions %}
+                <div class="w-full lg:w-1/2 px-4">
+                  <div class="mb-5 transition-all duration-500" x-data="{active: false}" :class="{'active': active}">
+                    <div class="faq-item-title"
+                         @click="active = !active">{{ row.question }}</div>
+                    <p class="faq-item-content">{{ row.answer|nl2br }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </section>
+      {% elseif section.acf_fc_layout == 'trading_section' %}
+        <style>
+          .last-section {
+            padding: 60px 0;
+            background-image: url({{ theme.link }}/static/last-1.webp),url({{ theme.link }}/static/last-2.webp);
+            background-repeat: no-repeat,no-repeat;
+            background-size: 23%,23%;
+            background-position: 0 100%,100% 100%;
+          }
+          .last-section p {
+            font-size: 24px;
+            margin-bottom: 1.5rem;
+          }
+        </style>
+        <section class="last-section">
+          <div class="container text-center" style="max-width: 1000px;">
+            {{ section.description }}
+            <div class="text-center mt-12">
+              <a href="{{ section.button_link }}" class="btn-link scroll-top" style="max-width: 350px;">{{ section.button_text }}</a>
+            </div>
+          </div>
+        </section>
+      {% endif %}
+
+    {% endfor %}
+  {% endif %}
+{% endfilter %}
+{% endblock %}

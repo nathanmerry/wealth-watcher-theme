@@ -1,0 +1,45 @@
+{
+  "name": "upstatement/timber-starter-theme",
+  "description": "Starter theme to build a Timber theme",
+  "type":"wordpress-theme",
+  "minimum-stability" : "stable",
+  "authors": [
+    {
+      "email": "jared@upstatement.com",
+      "name": "jarednova"
+    }  
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.9.5",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k=b3JkZXJfaWQ9MTUwMTcyfHR5cGU9ZGV2ZWxvcGVyfGRhdGU9MjAxOS0wMS0xOCAxNTowMzoyNQ==&t={%version}"
+        },
+        "require": {
+          "composer/installers": "^1.4",
+          "ffraenz/private-composer-installer": "^2.0"
+        }
+      }
+    }
+  ],
+  "require": {
+	  "timber/timber": "1.*",
+    "advanced-custom-fields/advanced-custom-fields-pro": "5.9.5"
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/{$name}/": [
+        "type:wordpress-plugin"
+      ]
+    }
+  }
+}

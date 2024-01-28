@@ -1,0 +1,41 @@
+{# <div class="container py-3 md:py-5"> #}
+  {# <div class="flex flex-col md:flex-row flex-wrap justify-between items-center">
+    <a href="/"> #}
+      {# {% if footer_logo %}
+        <img src="{{ footer_logo }}" alt="">
+      {% else %} #}
+        {# {{ site.name }} #}
+      {# {% endif %} #}
+    {# </a>
+    {% include "menu.twig" with {
+      'items': footer_menu.get_items,
+      'class': 'md:flex text-base my-4'
+    } %}
+  </div> #}
+  {# {% if footer_text %}
+    <div class="py-4" style="font-size: 16px;line-height: 1.88;">{{ footer_text }}</div>
+  {% endif %} #}
+{# </div> #}
+<div class="container legal-links">
+  <style>
+  .legal-links ul {
+    margin: 0;
+    align-items: center;
+  }
+  .legal-links ul li a {
+    font-size: 0.875rem;
+    padding: 0 0.75rem;
+    line-height: 1.25;
+    color: #ccc;
+  }
+  </style>
+  <div class="text-center p-4 flex flex-wrap justify-between" style="font-size: 15px; color: #ccc;">
+    <p class="text-base mb-0">
+      Copyright © 2021 {{ site.name}}. All Rights Reserved.
+    </p>
+    {% include "menu.twig" with {
+        'items': footer_menu.get_items,
+        'class': 'md:flex text-base my-4'
+      } %}
+  </div>
+</div>

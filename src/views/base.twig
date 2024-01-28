@@ -1,0 +1,65 @@
+{% block html_head_container %}
+
+{% include 'html-header.twig' %}
+	{% block head %}
+	{% endblock %}
+  {% if use_production_api %}
+    <!-- Global site tag (gtag.js) - Google Ads: 502201782 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-502201782"></script>
+    <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-502201782'); </script>
+    <!-- Event snippet for Submit lead form conversion page In your html page,
+    add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+    <script> function gtag_report_conversion(url) { var callback = function () { if (typeof(url) != 'undefined') { window.location = url; } }; gtag('event', 'conversion', { 'send_to': 'AW-502201782/7bB2CJ7zjaMCELb7u-8B', 'event_callback': callback }); return false; } </script>
+  {% endif %}
+	</head>
+{% endblock %}
+
+	<body class="{{body_class}}" data-template="base.twig">
+    <header class="relative px-5 py-5 header lg:px-0">
+      <div class="container" style="max-width: 1366px;">
+        <div class="items-center justify-between row">
+          <div class="flex items-center w-full" x-data="{ menuOpen: false }" :class="{ 'menu--active': menuOpen }">
+            <div class="">
+            </div>
+            {% if header_menu.get_items|length > 0 %}
+              <div class="flex justify-end flex-grow px-4 md:hidden">
+                <button type="button" class="p-2 hamb-menu" @click="menuOpen = !menuOpen">
+                  <span class="hamb-menu__box">
+                    <span class="hamb-menu__inner"></span>
+                  </span>
+                </button>
+              </div>
+              <nav id="nav-main" class="justify-end flex-grow hidden px-4 text-center md:flex" role="navigation">
+                {% include "menu.twig" with {
+                  'items': header_menu.get_items,
+                  'class': 'header-menu flex items-center'
+                } %}
+              </nav>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </header>
+
+		<section id="content" role="main">
+			{% if title %}<h1>{{title}}</h1>{% endif %}
+			<div class="wrapper {{sidebar_class}}">
+				{% block content %}
+					Sorry, no content
+				{% endblock %}
+			</div>
+			{% if sidebar %}
+				<aside class="layout-sidebar">
+					{{sidebar}}
+				</aside>
+			{% endif %}
+		</section>
+
+		{% block footer %}
+			<footer id="footer" class="footer" style="background-color: #F1F5F9;">
+				{% include 'footer.twig' %}
+			</footer>
+			{{ function('wp_footer') }}
+		{% endblock %}
+	</body>
+</html>
