@@ -1550,7 +1550,7 @@ module.exports = __webpack_require__(197);
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/wp-content/themes/wealth-watcher/public/";
+/******/ 		__webpack_require__.p = "/wp-content/themes/wealth-watcher-theme/public/";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
@@ -1683,4 +1683,4 @@ var intl_tel_input_default = /*#__PURE__*/__webpack_require__.n(intl_tel_input);
 
 /******/ })()
 ;
-//# sourceMappingURL=main.d079acd0.js.map
+//# sourceMappingURL=main.9ffcef9f.js.map
