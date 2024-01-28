@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
-const PUBLIC_PATH = '/wp-content/themes/bluespeaksfinance-theme/public/';
+const PUBLIC_PATH = '/wp-content/themes/wealth-watcher/public/';
 
 /**
  * Configure the CSS optimisation.
