@@ -1550,7 +1550,7 @@ module.exports = __webpack_require__(197);
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "/staging/wp-content/themes/bluespeaksfinance-theme/public/";
+/******/ 		__webpack_require__.p = "/wp-content/themes/wealth-watcher/public/";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
@@ -1683,4 +1683,4 @@ var intl_tel_input_default = /*#__PURE__*/__webpack_require__.n(intl_tel_input);
 
 /******/ })()
 ;
-//# sourceMappingURL=main.ef499ea6.js.map
+//# sourceMappingURL=main.d079acd0.js.map
