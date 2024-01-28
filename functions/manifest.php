@@ -16,7 +16,7 @@
 function get_manifest_file( $filename, $manifestPath = null ) {
   // Set the default path if one isn't provided.
   if (is_null($manifestPath)) {
-    $manifestPath = get_stylesheet_directory() . '/public/manifest.json';
+    $manifestPath = get_stylesheet_directory() . '/output/manifest.json';
   }
 
 

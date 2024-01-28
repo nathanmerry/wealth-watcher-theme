@@ -8,7 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const path = require('path');
 
-const PUBLIC_PATH = '/wp-content/themes/wealth-watcher-theme/public/';
+const PUBLIC_PATH = '/wp-content/themes/wealth-watcher-theme/output/';
 
 /**
  * Configure the CSS optimisation.
@@ -137,7 +137,7 @@ module.exports = {
   },
   output: {
     filename: 'scripts/[name].[contenthash:8].js',
-    path: path.join(__dirname, '/public'),
+    path: path.join(__dirname, '/output'),
     publicPath: PUBLIC_PATH,
     clean: true
   },
